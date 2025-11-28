@@ -19,8 +19,11 @@ Tinkercad provides a simulation environment where this circuit can be virtually 
 
 
 ## Circuit Diagram:
+
+<img width="1318" height="684" alt="image" src="https://github.com/user-attachments/assets/29d77933-5b50-468d-98e1-a1c0aee4cc3b" />
+
  
-## Procedure: //Modify the procedure based on your circuit
+## Procedure:
 
 Step 1: Set Up the Tinkercad Environment
 1.	Log in to Tinkercad: Open Tinkercad in your web browser and log into your account.
@@ -35,8 +38,6 @@ o	VCC Pin: Connect to 5V pin on the Arduino.
 o	GND Pin: Connect to GND on the Arduino.
 o	Trig Pin: Connect to Digital Pin 3 on the Arduino.
 o	Echo Pin: Connect to Digital Pin 2 on the Arduino.
-
-
 7.	Wire Connections:
 o	Use the color-coded jumper wires (e.g., red for VCC, black for GND, green for Trig, and blue for Echo) to make it easier to identify connections.
 Step 4: Write the Arduino Code
@@ -53,14 +54,37 @@ Step 7: Save Your Work
 
 
 ## Code:
-
+```cpp
+#define echoPin 2
+#define trigPin 3
+long duration;
+int distance;
+void setup()
+{
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+}
+```
 
 ## Output:
- 
+
+<img width="1174" height="806" alt="image" src="https://github.com/user-attachments/assets/280a9ffa-ec68-4ada-acbd-0a9959ee658f" />
 
 
 ## Result
 
-
-Result:
 The simulation successfully measured the distance between the ultrasonic sensor  HC-SR04 and the object. The real-time distance values were accurately displayed on the serial monitor in centimeters.
